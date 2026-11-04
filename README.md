@@ -17,6 +17,3 @@ This repository will contain model training, inference, data preparation, and ev
 
 Early research and development. Model selection, datasets, and the action schema are being defined.
 
-## Documentation
-
-- [ML project specification (Russian)](docs/ml-spec.md): scope, model interfaces, data, evaluation, and initial experiments.
