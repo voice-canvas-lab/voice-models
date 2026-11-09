@@ -1,0 +1,19 @@
+{
+  "inputs_dir": "data/v1/inputs",
+  "run_dir": "data/v1",
+  "n_objects_per_type": 20,
+  "n_texts_per_template": 5,
+  "n_templates_per_action": 5,
+  "max_parameter_length": 60,
+  "split_ratios": [
+    0.8,
+    0.1,
+    0.1
+  ],
+  "seed": 42,
+  "model": "qwen2.5:3b",
+  "temperature": 0.7,
+  "num_predict": 4096,
+  "num_ctx": 8192,
+  "log_every": 10
+}

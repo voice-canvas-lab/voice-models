@@ -1,0 +1,5 @@
+jsonschema>=4.18,<5
+ollama>=0.4,<1
+
+# Model weights are downloaded with `ollama pull`, not pip.
+# The model name is configured in configs/text.json.
