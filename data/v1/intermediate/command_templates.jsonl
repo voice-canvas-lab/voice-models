@@ -1,0 +1,34 @@
+{"action_id": "create", "parameters": ["name", "object_type"], "text": "Создай новый объект {object_type} с названием {name} в текущей папке"}
+{"action_id": "create", "parameters": ["name", "object_type"], "text": "Создай новый {object_type} с названием {name} в текущей папке"}
+{"action_id": "create", "parameters": ["name", "object_type"], "text": "Создай в текущей папке новый объект {object_type} с названием {name}"}
+{"action_id": "create", "parameters": ["name", "object_type"], "text": "Создай объект {object_type} с названием {name} в текущей папке"}
+{"action_id": "create", "parameters": ["name", "object_type"], "text": "Создай в текущей папке объект {object_type} с названием {name}"}
+{"action_id": "open", "parameters": ["name", "object_type"], "text": "Открой {object_type} {name}"}
+{"action_id": "open", "parameters": ["name", "object_type"], "text": "открой {name} {object_type}"}
+{"action_id": "open", "parameters": ["name", "object_type"], "text": "Просмотр {name} {object_type}"}
+{"action_id": "open", "parameters": ["name", "object_type"], "text": "Редактируй {name} {object_type}"}
+{"action_id": "delete", "parameters": ["name", "object_type"], "text": "Удалить {name} {object_type}"}
+{"action_id": "delete", "parameters": ["name", "object_type"], "text": "Удалить {object_type} {name}"}
+{"action_id": "delete", "parameters": ["name", "object_type"], "text": "Удалить {object_type} с названием {name}"}
+{"action_id": "delete", "parameters": ["name", "object_type"], "text": "Удалить {name}, это {object_type}"}
+{"action_id": "delete", "parameters": ["name", "object_type"], "text": "Удалить {name} из {object_type}"}
+{"action_id": "rename", "parameters": ["new_name", "object_type", "old_name"], "text": "Измени {object_type} {old_name} в {new_name}, сохранив все содержимое и расположение."}
+{"action_id": "rename", "parameters": ["new_name", "object_type", "old_name"], "text": "Реформулируй {object_type} {old_name} в {new_name}, убедившись, что сохраняется содержимое и расположение."}
+{"action_id": "rename", "parameters": ["new_name", "object_type", "old_name"], "text": "Переимяни {object_type} {old_name} в {new_name}, чтобы оно сохраняло прежнее содержимое и расположение."}
+{"action_id": "rename", "parameters": ["new_name", "object_type", "old_name"], "text": "Измени {object_type} {old_name} на {new_name}, и будь уверен(а) что сохраняется содержимое и расположение."}
+{"action_id": "rename", "parameters": ["new_name", "object_type", "old_name"], "text": "измени {object_type} {old_name} в {new_name}, сохранив содержимое и расположение."}
+{"action_id": "copy", "parameters": ["destination_name", "name", "object_type"], "text": "Создай копию {name} из {object_type} в папке {destination_name}"}
+{"action_id": "copy", "parameters": ["destination_name", "name", "object_type"], "text": "Создай копию {name} из {object_type} в папке {destination_name}, не изменяя оригинальное название"}
+{"action_id": "copy", "parameters": ["destination_name", "name", "new_name", "object_type"], "text": "Создай копию {name} из {object_type} в папке {destination_name}, с именем {new_name}"}
+{"action_id": "copy", "parameters": ["destination_name", "name", "object_type"], "text": "создай копию {name} {object_type} в папке {destination_name}"}
+{"action_id": "copy", "parameters": ["destination_name", "name", "object_type"], "text": "создай копию {name} {object_type} в папке {destination_name}, сохранив оригинальное название"}
+{"action_id": "search", "parameters": ["object_type", "query"], "text": "Показать {object_type} по {query}"}
+{"action_id": "search", "parameters": ["query"], "text": "Показать {query}"}
+{"action_id": "search", "parameters": ["object_type", "query"], "text": "Показать {query} {object_type}"}
+{"action_id": "search", "parameters": ["object_type", "query"], "text": "Поиск {query} {object_type}"}
+{"action_id": "search", "parameters": ["object_type", "query"], "text": "Показать {object_type} {query}"}
+{"action_id": "save", "parameters": [], "text": "Сохранить изменения текущего документа"}
+{"action_id": "save", "parameters": [], "text": "Сохранить изменения файл"}
+{"action_id": "save", "parameters": [], "text": "Сохранить изменения заметки"}
+{"action_id": "save", "parameters": [], "text": "Сохранить изменения открытого объекта"}
+{"action_id": "save", "parameters": ["object_type"], "text": "Сохранить изменения файла {object_type}"}
