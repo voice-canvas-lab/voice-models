@@ -1,0 +1,12 @@
+{
+  "completed": true,
+  "whisper_copy_matches_original_hashes": true,
+  "analysis_protocol_unchanged": true,
+  "both_freeze_checks_passed": true,
+  "asr_audio_hashes_verified": 1359,
+  "source_sha256": "48300af1561a011f48adaa135028c80bbd847d534756790a00fed12f1baac535",
+  "asr_input": "audio only; no prompts, context, action_id, args or references",
+  "failed_metadata_attempts_preserved": 2,
+  "successfully_processed_per_model": 1359,
+  "empty_or_missing_hypotheses": 0
+}

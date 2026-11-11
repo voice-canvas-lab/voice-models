@@ -1,0 +1,30 @@
+{
+  "unit_tests": {
+    "workspace": 86,
+    "proposed_tree": 86,
+    "passed": true
+  },
+  "dependencies": {
+    "main": "No broken requirements found.",
+    "gigaam": "No broken requirements found.",
+    "fresh_install_repeated": false
+  },
+  "evaluation_from_published_predictions": {
+    "baseline_whisper": true,
+    "baseline_gigaam": true,
+    "numeric_whisper": true,
+    "numeric_gigaam": true,
+    "all_counts_and_rates_match_exactly": true
+  },
+  "models_or_tts_run": false,
+  "local_markdown_links_checked": 30,
+  "powershell_blocks_parsed_without_execution": 14,
+  "git_diff_check_passed": true,
+  "staging_performed": false,
+  "frozen_hashes_updated": false,
+  "original_freezes_verified": [
+    "ru-text-only-1.0.1",
+    "ru-spoken-3.1.0"
+  ],
+  "git_byte_filter_checks": 4
+}

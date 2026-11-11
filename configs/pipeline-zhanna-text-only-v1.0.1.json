@@ -1,0 +1,53 @@
+{
+  "samples": "examples/zhanna-v1/experiment-text-only-v1.0.1/ready_samples.jsonl",
+  "output": "outputs/pipeline-zhanna-text-only-v1.0.1",
+  "interpreters": {
+    "main": ".venv/Scripts/python.exe",
+    "gigaam": ".venv-gigaam/Scripts/python.exe"
+  },
+  "VOICES": [
+    "aidar",
+    "baya",
+    "xenia"
+  ],
+  "NOISE_SNRS_DB": [
+    20,
+    10
+  ],
+  "SEED": 42,
+  "TTS": {
+    "model": "v5_ru",
+    "model_sha256": "7ba04d42340fe0398042eed2e0d12d62e23096d626b1b9feff4dcb1309197ab4",
+    "cpu_threads": 4,
+    "put_accent": true,
+    "put_yo": true
+  },
+  "ASR": {
+    "whisper": {
+      "model": "Systran/faster-whisper-small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "device": "cpu",
+      "compute_type": "int8",
+      "cpu_threads": 4,
+      "decoding": {
+        "language": "ru",
+        "task": "transcribe",
+        "beam_size": 5,
+        "temperature": 0.0,
+        "condition_on_previous_text": false,
+        "vad_filter": false,
+        "word_timestamps": false
+      }
+    },
+    "gigaam": {
+      "model": "ai-sage/GigaAM-v3",
+      "revision": "cec030b4c4f35d928e4a9044a3bdb29ebd499fac",
+      "device": "cpu",
+      "compute_type": "float32",
+      "cpu_threads": 4,
+      "decoding": {
+        "method": "greedy_ctc"
+      }
+    }
+  }
+}

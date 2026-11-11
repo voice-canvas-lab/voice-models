@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/voice-canvas-lab/voice-models",
+  "pull_request": "https://github.com/voice-canvas-lab/voice-models/pull/5",
+  "source_path": "data/v1/dataset/samples.jsonl",
+  "commit": "a1dff1335109d12e5594391066d6a260ce54601b",
+  "sha256": "48300af1561a011f48adaa135028c80bbd847d534756790a00fed12f1baac535",
+  "bytes": 86175,
+  "samples": 163,
+  "preservation": "Exact git blob bytes; no text, context, labels, groups or split changes."
+}

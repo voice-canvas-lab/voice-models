@@ -1,0 +1,6 @@
+# Audited SHA256 values refer to exact bytes, including existing line endings.
+# Preserve these bytes across Windows/Linux checkouts; do not rewrite old freezes.
+/scripts/** -text
+/configs/** -text
+/examples/** -text
+/docs/reports/** -text
