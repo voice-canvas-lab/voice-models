@@ -1,0 +1,82 @@
+{
+  "outputs/pipeline-zhanna-text-only-v1.0.1/dataset/samples.jsonl": {
+    "sha256": "bf43aa7cc42c102388977b77a85cf3cc80cc7895139c159d6b982907af927ba4",
+    "bytes": 86334,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/dataset/samples.jsonl"
+  },
+  "outputs/pipeline-zhanna-text-only-v1.0.1/dataset/audio_manifest.jsonl": {
+    "sha256": "2265ecb7efb0edd6dcaf66676bc6d5c79820a87d86d044a51e55f908c2dd2cd8",
+    "bytes": 1090253,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/dataset/audio_manifest.jsonl"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/whisper/predictions.jsonl": {
+    "sha256": "0a9605c3e413908fcd35e23d4840f503fd2c83f95df1945b145f1a4f3c57682d",
+    "bytes": 298737,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/whisper/predictions.jsonl"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/whisper/timings.jsonl": {
+    "sha256": "9ea49f114c753ec5034accf9ca43e2c6da713315204bc9aa93dd642a4230d378",
+    "bytes": 323770,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/whisper/timings.jsonl"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/whisper/asr_settings.json": {
+    "sha256": "e6e480b0ddcc50313ccef4f6e7da0a22abb0d3cde2338e7192b3305fdd5a5549",
+    "bytes": 4693,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/whisper/asr_settings.json"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/gigaam/predictions.jsonl": {
+    "sha256": "86192175a79f597fffa45c0f98a67a2734bf17911bb3a5c74880f72b16b998d9",
+    "bytes": 295883,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/gigaam/predictions.jsonl"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/gigaam/timings.jsonl": {
+    "sha256": "a9b333320633815821486f6fbf496d0c0ae70118f03661c0a91652b7376505d8",
+    "bytes": 325260,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/gigaam/timings.jsonl"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/gigaam/asr_settings.json": {
+    "sha256": "ba43d436d73b1eb9834091e91812c207f6be09abf8c04fce2f17dceedaf7803d",
+    "bytes": 5781,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/gigaam/asr_settings.json"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/config.models.json": {
+    "sha256": "9e3fcc08ff9151841622ba8947fbe41c7558c4b7f8b45d370d1e36be60b94505",
+    "bytes": 1080,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/config.models.json"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/analysis/summary.json": {
+    "sha256": "177fdd04c04137d212d538d52d2b02a57d6e0cc242c03938c771f6da0bc8af37",
+    "bytes": 2844,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/metrics.json"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/analysis/slices.csv": {
+    "sha256": "271e49e2a12a1cd13c5c17d52e53516032a4b62ee356d57f9b0f1754de82449d",
+    "bytes": 4046,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/slices.csv"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/analysis/slices.json": {
+    "sha256": "9483cd47f22884f809c0644460e6e2fccf75f9e816bc412ed3b42bd64228e6a5",
+    "bytes": 44559,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/slices.json"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/final-integrity.json": {
+    "sha256": "66ee0f1faf801d14d4a0ccee5700a2792c02a13d494333bde22786014ee0e889",
+    "bytes": 486,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/final-integrity.json"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-full-cached/analysis/slow_records_retained.json": {
+    "sha256": "75881251edd9f922dff4f5a56dad7c1ea755acc38311b97ba6e3e5b00173ead4",
+    "bytes": 12637,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/slow_records_retained.json"
+  },
+  "examples/zhanna-v1/text-only-v1.0.1/manual-review-confirmed.json": {
+    "sha256": "fd6b9481363889d7b98d028549e8c4d44b6d46d63c05e762606852f7d3473a78",
+    "bytes": 2696,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/manual-review-five.json"
+  },
+  "outputs/asr-zhanna-text-only-v1.0.1-pilot/analysis-verified/summary.json": {
+    "sha256": "ffde9ce01d098cb9dcf82305e295c7e0e66089d723320ec694fb1fcb53a0d995",
+    "bytes": 2767,
+    "published_as": "docs/reports/zhanna-text-only-v1.0.1/artifacts/pilot-metrics.json"
+  }
+}

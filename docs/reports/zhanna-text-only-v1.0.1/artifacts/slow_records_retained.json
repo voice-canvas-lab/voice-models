@@ -1,0 +1,338 @@
+{
+  "whisper": {
+    "speed_preliminary": true,
+    "all_records_retained": true,
+    "largest_elapsed_sec": [
+      {
+        "sample_id": "sample_000102",
+        "audio_id": "audio_0097_xenia_snr10",
+        "duration_sec": 16.1,
+        "elapsed_sec": 33.87256090005394,
+        "rtf": 2.1038857701896854,
+        "audio_sha256": "f1047a27a10ff85d2210a07a7e4421aa6ae805fc1a05ef4cf2fc1c60aaa85c11"
+      },
+      {
+        "sample_id": "sample_000139",
+        "audio_id": "audio_0132_baya_snr20",
+        "duration_sec": 2.7875,
+        "elapsed_sec": 19.960357300005853,
+        "rtf": 7.160666295966225,
+        "audio_sha256": "cc6d1eb4d0467177c10be7a29d9411b869d4939340a4a923b64ac957789b2b72"
+      },
+      {
+        "sample_id": "sample_000102",
+        "audio_id": "audio_0097_aidar_snr10",
+        "duration_sec": 18.0125,
+        "elapsed_sec": 19.511430600075983,
+        "rtf": 1.0832161332450234,
+        "audio_sha256": "98c88e7b6f7075ca0d323397a3eb1ba4aa38c5e84f7374d09e890cfda7a70ae7"
+      },
+      {
+        "sample_id": "sample_000119",
+        "audio_id": "audio_0112_baya_snr10",
+        "duration_sec": 2.8875,
+        "elapsed_sec": 18.41813360003289,
+        "rtf": 6.378574406937797,
+        "audio_sha256": "0ec38bda0123bc3d442917bf97dc76392a69b9fbd150a24833df0228928807ee"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_aidar_clean",
+        "duration_sec": 5.75,
+        "elapsed_sec": 17.046840699971654,
+        "rtf": 2.964667947821157,
+        "audio_sha256": "b98dbb2aa32bb8c49d9aaafa9ed231487f0772ce08eb9e3d6be7332a28c530fb"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_xenia_clean",
+        "duration_sec": 5.1,
+        "elapsed_sec": 16.569302699994296,
+        "rtf": 3.2488828823518228,
+        "audio_sha256": "b746583a9c4011959ac5286943af4df9e5cb48ef99124f4807acbac6addb4f2c"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_aidar_snr20",
+        "duration_sec": 5.75,
+        "elapsed_sec": 16.33876519999467,
+        "rtf": 2.8415243826077683,
+        "audio_sha256": "97488115791309f9bd616912d1c840d6b968be7486307b894b55e093de3c1a5d"
+      },
+      {
+        "sample_id": "sample_000119",
+        "audio_id": "audio_0112_baya_snr20",
+        "duration_sec": 2.8875,
+        "elapsed_sec": 15.946582600008696,
+        "rtf": 5.52262600866102,
+        "audio_sha256": "5d4c52fb42a28064c56f73e81a571d9b141dc8a7ea9dd0c1a586aaa186548e1d"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_baya_clean",
+        "duration_sec": 6.0,
+        "elapsed_sec": 15.501323499949649,
+        "rtf": 2.583553916658275,
+        "audio_sha256": "050d98157eb764808ed183386672fba0dc645db38c04814eaa4ff9649865f1df"
+      },
+      {
+        "sample_id": "sample_000155",
+        "audio_id": "audio_0143_aidar_snr10",
+        "duration_sec": 8.375,
+        "elapsed_sec": 10.709902200032957,
+        "rtf": 1.2787942925412485,
+        "audio_sha256": "34098b41bdbdd3535877d7c5d9625e2b751c871ed7ce6a93dedf7a4e7b73a373"
+      }
+    ],
+    "largest_rtf": [
+      {
+        "sample_id": "sample_000139",
+        "audio_id": "audio_0132_baya_snr20",
+        "duration_sec": 2.7875,
+        "elapsed_sec": 19.960357300005853,
+        "rtf": 7.160666295966225,
+        "audio_sha256": "cc6d1eb4d0467177c10be7a29d9411b869d4939340a4a923b64ac957789b2b72"
+      },
+      {
+        "sample_id": "sample_000119",
+        "audio_id": "audio_0112_baya_snr10",
+        "duration_sec": 2.8875,
+        "elapsed_sec": 18.41813360003289,
+        "rtf": 6.378574406937797,
+        "audio_sha256": "0ec38bda0123bc3d442917bf97dc76392a69b9fbd150a24833df0228928807ee"
+      },
+      {
+        "sample_id": "sample_000119",
+        "audio_id": "audio_0112_baya_snr20",
+        "duration_sec": 2.8875,
+        "elapsed_sec": 15.946582600008696,
+        "rtf": 5.52262600866102,
+        "audio_sha256": "5d4c52fb42a28064c56f73e81a571d9b141dc8a7ea9dd0c1a586aaa186548e1d"
+      },
+      {
+        "sample_id": "sample_000026",
+        "audio_id": "audio_0026_baya_snr20",
+        "duration_sec": 2.9375,
+        "elapsed_sec": 9.60072540002875,
+        "rtf": 3.268332051073617,
+        "audio_sha256": "010f80f9a471427f364b6dd7ed47a46e2f6a94a5afe57f86d0b84da579676e19"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_xenia_clean",
+        "duration_sec": 5.1,
+        "elapsed_sec": 16.569302699994296,
+        "rtf": 3.2488828823518228,
+        "audio_sha256": "b746583a9c4011959ac5286943af4df9e5cb48ef99124f4807acbac6addb4f2c"
+      },
+      {
+        "sample_id": "sample_000026",
+        "audio_id": "audio_0026_baya_snr10",
+        "duration_sec": 2.9375,
+        "elapsed_sec": 9.310771099990234,
+        "rtf": 3.1696242042519946,
+        "audio_sha256": "6fb68fcaaf315a3e671b389d805c7b04516e7d8e342e525b3aaee57bfe3f0528"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_aidar_clean",
+        "duration_sec": 5.75,
+        "elapsed_sec": 17.046840699971654,
+        "rtf": 2.964667947821157,
+        "audio_sha256": "b98dbb2aa32bb8c49d9aaafa9ed231487f0772ce08eb9e3d6be7332a28c530fb"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_aidar_snr20",
+        "duration_sec": 5.75,
+        "elapsed_sec": 16.33876519999467,
+        "rtf": 2.8415243826077683,
+        "audio_sha256": "97488115791309f9bd616912d1c840d6b968be7486307b894b55e093de3c1a5d"
+      },
+      {
+        "sample_id": "sample_000128",
+        "audio_id": "audio_0121_xenia_snr10",
+        "duration_sec": 1.8125,
+        "elapsed_sec": 4.767961100093089,
+        "rtf": 2.6305992276375663,
+        "audio_sha256": "68d21fea565ccb7dd94b36bb3795838627bdf1745edbd4a0e6952f875c913cb8"
+      },
+      {
+        "sample_id": "sample_000135",
+        "audio_id": "audio_0128_baya_clean",
+        "duration_sec": 6.0,
+        "elapsed_sec": 15.501323499949649,
+        "rtf": 2.583553916658275,
+        "audio_sha256": "050d98157eb764808ed183386672fba0dc645db38c04814eaa4ff9649865f1df"
+      }
+    ]
+  },
+  "gigaam": {
+    "speed_preliminary": true,
+    "all_records_retained": true,
+    "largest_elapsed_sec": [
+      {
+        "sample_id": "sample_000102",
+        "audio_id": "audio_0097_baya_clean",
+        "duration_sec": 18.425,
+        "elapsed_sec": 3.9436436999822035,
+        "rtf": 0.2140376499311915,
+        "audio_sha256": "72d8ca202ff6b6132c136c10834a97c03ca27809c78e412bb2b8a8cb2bf222e0"
+      },
+      {
+        "sample_id": "sample_000088",
+        "audio_id": "audio_0083_baya_clean",
+        "duration_sec": 16.175,
+        "elapsed_sec": 3.4742485000751913,
+        "rtf": 0.21479125193664242,
+        "audio_sha256": "b53cfac72ddb3e7e2d377ba6026779eaa98b3693fc301cfc1ab6bd61369f4a13"
+      },
+      {
+        "sample_id": "sample_000078",
+        "audio_id": "audio_0073_baya_snr10",
+        "duration_sec": 17.25,
+        "elapsed_sec": 3.2688419999321923,
+        "rtf": 0.18949808695259085,
+        "audio_sha256": "793a48390ac7e1f2564d212f49db5d098e7d1d5f51318dcf59a1f390b47c83d2"
+      },
+      {
+        "sample_id": "sample_000078",
+        "audio_id": "audio_0073_aidar_snr10",
+        "duration_sec": 17.0,
+        "elapsed_sec": 3.2655526999151334,
+        "rtf": 0.1920913352891255,
+        "audio_sha256": "acc1e0037c20876850c3472e4fcbd43c6c607e32362c4d8696259a316620b680"
+      },
+      {
+        "sample_id": "sample_000078",
+        "audio_id": "audio_0073_xenia_clean",
+        "duration_sec": 14.8625,
+        "elapsed_sec": 3.2035946000833064,
+        "rtf": 0.21554883768432676,
+        "audio_sha256": "953309f01ffec53afdca64ff983b15b59dfb14422667c2aeff88695547ab1341"
+      },
+      {
+        "sample_id": "sample_000107",
+        "audio_id": "audio_0100_aidar_clean",
+        "duration_sec": 11.0125,
+        "elapsed_sec": 3.1818231999641284,
+        "rtf": 0.28892832689799125,
+        "audio_sha256": "2c5d002576e565d4138af4cc947ab9a037fb86a4226f49810b1996d2ecccd74a"
+      },
+      {
+        "sample_id": "sample_000078",
+        "audio_id": "audio_0073_aidar_snr20",
+        "duration_sec": 17.0,
+        "elapsed_sec": 3.153067299979739,
+        "rtf": 0.1854745470576317,
+        "audio_sha256": "56d305d905ab33634888bf6553ab0bd1d9ebccd1e551240bcfc080ff66d8ac6c"
+      },
+      {
+        "sample_id": "sample_000088",
+        "audio_id": "audio_0083_aidar_snr10",
+        "duration_sec": 15.875,
+        "elapsed_sec": 3.1384039000840858,
+        "rtf": 0.19769473386356445,
+        "audio_sha256": "f9ef92d51472a9e191cc59ca2dc03c723128f8bfbca028032fd01c77eb24cb74"
+      },
+      {
+        "sample_id": "sample_000078",
+        "audio_id": "audio_0073_baya_clean",
+        "duration_sec": 17.25,
+        "elapsed_sec": 3.131883400026709,
+        "rtf": 0.18155845797256284,
+        "audio_sha256": "ce1a7745f7c8b154b22f149357cd11306fb398ffda02e2b5ebc02fa516385228"
+      },
+      {
+        "sample_id": "sample_000081",
+        "audio_id": "audio_0076_baya_clean",
+        "duration_sec": 16.75,
+        "elapsed_sec": 3.1132020000368357,
+        "rtf": 0.1858628059723484,
+        "audio_sha256": "3914fd81a1b92c94c026b66bada85fdb880d192df35fb90f80259ab43c5c3ed8"
+      }
+    ],
+    "largest_rtf": [
+      {
+        "sample_id": "sample_000034",
+        "audio_id": "audio_0032_baya_snr10",
+        "duration_sec": 3.1375,
+        "elapsed_sec": 1.4406822000164539,
+        "rtf": 0.45918157769448725,
+        "audio_sha256": "91d0c2ab31b3df4adb33986be73d82ddf24f5a948b473829fbbb6c515fba9f41"
+      },
+      {
+        "sample_id": "sample_000043",
+        "audio_id": "audio_0038_aidar_clean",
+        "duration_sec": 3.475,
+        "elapsed_sec": 1.4739495000103489,
+        "rtf": 0.424158129499381,
+        "audio_sha256": "a7b8f9e321a2844463a45bda815bdcc5d027470c65ce52d5f33f34b68ed6a897"
+      },
+      {
+        "sample_id": "sample_000118",
+        "audio_id": "audio_0111_aidar_snr20",
+        "duration_sec": 2.35,
+        "elapsed_sec": 0.9692460999358445,
+        "rtf": 0.41244514890887,
+        "audio_sha256": "fdee102b1a473e14bcea58b26cdfbc8422232ab62184f28bc18082145d5db83a"
+      },
+      {
+        "sample_id": "sample_000035",
+        "audio_id": "audio_0033_baya_snr10",
+        "duration_sec": 2.65,
+        "elapsed_sec": 1.0023635000688955,
+        "rtf": 0.3782503773844889,
+        "audio_sha256": "9b98cde724a559604a8af8d7d2f461d0041995aa8272833622471bf0c8f482cd"
+      },
+      {
+        "sample_id": "sample_000147",
+        "audio_id": "audio_0140_xenia_snr10",
+        "duration_sec": 1.6375,
+        "elapsed_sec": 0.611129799974151,
+        "rtf": 0.3732090381521533,
+        "audio_sha256": "9ea48f93cca4ac247443ac10e3d774026626450074753da381b242acb0225dfa"
+      },
+      {
+        "sample_id": "sample_000123",
+        "audio_id": "audio_0116_xenia_snr10",
+        "duration_sec": 2.375,
+        "elapsed_sec": 0.8775504999794066,
+        "rtf": 0.36949494735975014,
+        "audio_sha256": "4f9d586fd2620fb494fa25eb0ece95accb601ea53881fb4f7f92534e96c3bc57"
+      },
+      {
+        "sample_id": "sample_000144",
+        "audio_id": "audio_0137_xenia_snr20",
+        "duration_sec": 1.8,
+        "elapsed_sec": 0.6639956999570131,
+        "rtf": 0.3688864999761184,
+        "audio_sha256": "c1364062831db9facbc11a13c777756a188894288506cb2fb82c9fcfb4a92fa2"
+      },
+      {
+        "sample_id": "sample_000038",
+        "audio_id": "audio_0035_aidar_clean",
+        "duration_sec": 2.6375,
+        "elapsed_sec": 0.9280424000462517,
+        "rtf": 0.35186441707914756,
+        "audio_sha256": "022e98cd6cd30ecad3262bc6f6817807ace62e3880b95c785375aedb37924525"
+      },
+      {
+        "sample_id": "sample_000147",
+        "audio_id": "audio_0140_aidar_clean",
+        "duration_sec": 2.0875,
+        "elapsed_sec": 0.734333400032483,
+        "rtf": 0.35177647905747694,
+        "audio_sha256": "4ab5f6c4cc87a129e0cc436a8912f2b85e0ed66c9ebf7128fccc1af218c55ae4"
+      },
+      {
+        "sample_id": "sample_000032",
+        "audio_id": "audio_0031_baya_snr10",
+        "duration_sec": 2.5875,
+        "elapsed_sec": 0.9088869000552222,
+        "rtf": 0.3512606377025014,
+        "audio_sha256": "38c3f5ddda8d1a849454ad872eed5459360ebb6e1be6317b4e86da4685e1556e"
+      }
+    ]
+  }
+}
