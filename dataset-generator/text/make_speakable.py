@@ -1,13 +1,17 @@
 """Подготовка команд к произнесению с проверкой каждого пакета."""
 
 import json
+from math import ceil
 
 from jsonschema import Draft202012Validator, ValidationError
 
 from command_form import validate_command_form
 
 
-def make_speakable(examples, actions, generate, *, log_every=10):
+def make_speakable(
+    examples, actions, generate, *, log_every=10,
+    min_completion_ratio=0.8, max_generation_attempts=3,
+):
     batch_size = 4
     actions_by_id = {action['action_id']: action for action in actions}
     item_schema = {
@@ -20,8 +24,10 @@ def make_speakable(examples, actions, generate, *, log_every=10):
     next_log = log_every
     for start in range(0, len(examples), batch_size):
         pending = dict(enumerate(examples[start:start + batch_size], start))
+        batch_count = len(pending)
+        minimum = ceil(batch_count * min_completion_ratio)
         error = ''
-        for _ in range(3):
+        for _ in range(max_generation_attempts):
             commands = [
                 {
                     'id': index, **example,
@@ -31,19 +37,20 @@ def make_speakable(examples, actions, generate, *, log_every=10):
                 for index, example in pending.items()
             ]
             prompt = (
-                'Сделай текст естественной голосовой командой на русском. '
-                'Формулируй прямую команду без вопросов, подтверждений и условий. '
-                'Исправь падежи, согласование и предлоги, сохрани действие и смысл каждого аргумента. '
-                'В именах файлов убери расширения, включая составные; в названиях замени подчёркивания пробелами. '
-                'Эти изменения и кавычки вокруг названий допустимы; остальные части значений сохраняй. '
-                'Названия с вопросительным знаком заключай в кавычки. '
+                'Исправь только локальные грамматические ошибки в заполненном шаблоне команды на русском. '
+                'Сохрани конструкцию шаблона, порядок смысловых слов и аргументов, действие и роли аргументов. '
+                'Допустимы изменения падежа и согласования, добавление или исправление необходимых предлогов, '
+                'пунктуации и кавычек. Не перефразируй команду и не заменяй слова синонимами. '
+                'Сохрани все слова подставленных значений, допускается только их грамматическое согласование. '
+                'Числа, даты, версии, идентификаторы, расширения файлов сохраняй точно. '
+                'Команда должна оставаться прямой, без добавленных вопросов, подтверждений и условий. '
                 'Меняй только text. Не произноси сведения из контекста, которых не было в черновике. '
                 'Если исправления не нужны, оставь текст как есть. '
                 'Верни массив объектов id и text для всех команд, сохранив id.\n'
                 f'Команды: {json.dumps(commands, ensure_ascii=False)}'
             )
             request_prompt = prompt + error
-            schema = {'type': 'array', 'items': item_schema, 'minItems': len(pending), 'maxItems': len(pending)}
+            schema = {'type': 'array', 'items': item_schema, 'minItems': 1, 'maxItems': len(pending)}
             try:
                 result = json.loads(generate(request_prompt, schema))
                 if not isinstance(result, list):
@@ -61,8 +68,10 @@ def make_speakable(examples, actions, generate, *, log_every=10):
                         error = f'\nИсправь формат ответа: {exc}'
             except (ValueError, ValidationError) as exc:
                 error = f'\nИсправь формат ответа: {exc}'
-            if not pending:
+            if batch_count - len(pending) >= minimum:
                 break
+        if batch_count - len(pending) < minimum:
+            print(f"Подготовка речи: пакет {start} — принято {batch_count - len(pending)}/{batch_count}, минимум {minimum}.", flush=True)
         processed = min(start + batch_size, len(examples))
         if processed >= next_log or processed == len(examples):
             print(f'Подготовка речи: обработано {processed}/{len(examples)}, получено {len(samples)} команд.', flush=True)

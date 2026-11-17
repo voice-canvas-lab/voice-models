@@ -8,7 +8,7 @@ from random import Random
 from tempfile import NamedTemporaryFile
 
 from llm import generate_json
-from generate_world import generate_world, load_object_types, load_world
+from generate_world import generate_world, load_object_types, load_world, validate_object
 from make_speakable import make_speakable
 from generate_templates import generate_templates
 from prepare_examples import prepare_examples
@@ -31,15 +31,19 @@ class PipelineConfig:
     num_ctx: int
     log_every: int
     n_objects_per_type: int = 100
+    min_completion_ratio: float = 0.8
+    max_generation_attempts: int = 3
 
     def __post_init__(self) -> None:
         for name in (
             "n_texts_per_template", "n_templates_per_action", "max_parameter_length",
-            "num_predict", "num_ctx", "log_every", "n_objects_per_type",
+            "num_predict", "num_ctx", "log_every", "n_objects_per_type", "max_generation_attempts",
         ):
             value = getattr(self, name)
             if type(value) is not int or value < 1:
                 raise ValueError(f"{name} должен быть положительным целым числом")
+        if type(self.min_completion_ratio) not in (int, float) or not 0 < self.min_completion_ratio <= 1:
+            raise ValueError("min_completion_ratio должна быть числом больше 0 и не больше 1")
         if type(self.seed) is not int:
             raise ValueError("seed должен быть целым числом")
         if type(self.temperature) not in (int, float) or not 0 <= self.temperature <= 2:
@@ -155,9 +159,51 @@ def save_generated_world(config: PipelineConfig, object_types, generate, path: P
         generate,
         n_objects_per_type=config.n_objects_per_type,
         max_name_length=config.max_parameter_length,
+        min_completion_ratio=config.min_completion_ratio,
+        max_generation_attempts=config.max_generation_attempts,
     )
     store_in_file(path, objects)
     return objects
+
+
+def load_prepared_examples(path: Path, actions: list[dict], object_types: dict[str, str]) -> list[dict]:
+    validators = {
+        action["action_id"]: Draft202012Validator(action["parameters"])
+        for action in actions
+    }
+    examples = []
+    with path.open(encoding="utf-8") as file:
+        for line_number, line in enumerate(file, 1):
+            try:
+                example = json.loads(line)
+                if not isinstance(example, dict) or not isinstance(example.get("action_id"), str):
+                    raise ValueError("Ожидается объект с action_id")
+                action_id = example["action_id"]
+                if action_id not in validators:
+                    raise ValueError(f"Неизвестное действие: {action_id}")
+                validators[action_id].validate(example.get("args"))
+                context = example.get("context")
+                if (
+                    not isinstance(context, dict)
+                    or not isinstance(context.get("objects"), list)
+                    or not isinstance(context.get("selected_object_ids"), list)
+                ):
+                    raise ValueError("context должен содержать списки objects и selected_object_ids")
+                ids = set()
+                for index, obj in enumerate(context["objects"]):
+                    validate_object(obj, object_types, ids, f"context.objects[{index}]")
+                for index, object_id in enumerate(context["selected_object_ids"]):
+                    if not isinstance(object_id, str) or object_id not in ids:
+                        raise ValueError(
+                            f"context.selected_object_ids[{index}]: "
+                            f"идентификатор {object_id!r} отсутствует в context.objects"
+                        )
+            except (ValueError, ValidationError) as exc:
+                raise ValueError(f"{path}, строка {line_number}: {exc}") from exc
+            examples.append({key: example[key] for key in ("action_id", "args", "context")})
+    if not examples:
+        raise ValueError(f"Файл заготовок пуст: {path}")
+    return examples
 
 
 def run_pipeline(
@@ -171,7 +217,11 @@ def run_pipeline(
     drafts_path = intermediate_dir / "draft_samples.jsonl"
     generate = configured_generator(config)
     world = []
-    if not use_prepared_examples:
+    prepared = None
+    if use_prepared_examples:
+        print(f"Загрузка готовых аргументов: {drafts_path}", flush=True)
+        prepared = load_prepared_examples(drafts_path, actions, object_types)
+    else:
         world_path = intermediate_dir / "world.jsonl"
         try:
             world = load_world(world_path, object_types)
@@ -183,36 +233,15 @@ def run_pipeline(
     print(f"Генерация шаблонов: {len(actions)} действий, модель {config.model}.", flush=True)
     for index, action in enumerate(actions, 1):
         print(f"Шаблоны: действие {index}/{len(actions)} — {action['action_id']}...", flush=True)
-        templates.extend(generate_templates(action, config.n_templates_per_action, generate))
+        templates.extend(generate_templates(
+            action, config.n_templates_per_action, generate,
+            min_completion_ratio=config.min_completion_ratio,
+            max_generation_attempts=config.max_generation_attempts,
+        ))
     if not templates:
         raise ValueError("Модель не сгенерировала допустимых шаблонов.")
     store_in_file(intermediate_dir / "command_templates.jsonl", templates)
-    examples = []
     rng = Random(config.seed)
-    if use_prepared_examples:
-        print(f"Загрузка готовых аргументов: {drafts_path}", flush=True)
-        actions_by_id = {action["action_id"]: action for action in actions}
-        for line_number, line in enumerate(drafts_path.read_text(encoding="utf-8").splitlines(), 1):
-            try:
-                example = json.loads(line)
-                if not isinstance(example, dict) or not isinstance(example.get("action_id"), str):
-                    raise ValueError("Ожидается объект с action_id")
-                if example["action_id"] not in actions_by_id:
-                    raise ValueError(f"Неизвестное действие: {example['action_id']}")
-                Draft202012Validator(actions_by_id[example["action_id"]]["parameters"]).validate(example.get("args"))
-                context = example.get("context")
-                if (
-                    not isinstance(context, dict)
-                    or not isinstance(context.get("objects"), list)
-                    or not isinstance(context.get("selected_object_ids"), list)
-                ):
-                    raise ValueError("context должен содержать списки objects и selected_object_ids")
-            except (ValueError, ValidationError) as exc:
-                raise ValueError(f"{drafts_path}, строка {line_number}: {exc}") from exc
-            examples.append({key: example[key] for key in ("action_id", "args", "context")})
-        if not examples:
-            raise ValueError(f"Файл заготовок пуст: {drafts_path}")
-    prepared = examples if use_prepared_examples else None
     examples = []
     print("Подбор значений и подстановка в шаблоны...", flush=True)
     for index, action in enumerate(actions, 1):
@@ -229,6 +258,8 @@ def run_pipeline(
     print(f"Подготовка текста к произнесению: {len(examples)} команд...", flush=True)
     samples = make_speakable(
         examples, actions, generate, log_every=config.log_every,
+        min_completion_ratio=config.min_completion_ratio,
+        max_generation_attempts=config.max_generation_attempts,
     )
     if not samples:
         raise ValueError("Подготовка речи не вернула ни одной допустимой команды.")

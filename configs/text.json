@@ -1,8 +1,10 @@
 {
   "inputs_dir": "data/v1/inputs",
   "run_dir": "data/v1",
+  "min_completion_ratio": 0.8,
+  "max_generation_attempts": 3,
   "n_objects_per_type": 20,
-  "n_texts_per_template": 5,
+  "n_texts_per_template": 10,
   "n_templates_per_action": 5,
   "max_parameter_length": 60,
   "split_ratios": [

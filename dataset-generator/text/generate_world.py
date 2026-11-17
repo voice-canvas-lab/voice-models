@@ -1,13 +1,13 @@
 """Генерация каталога объектов для синтетических сценариев."""
 
 import json
+from math import ceil
 from pathlib import Path
 
 from ollama import ResponseError
 
 
 BATCH_SIZE = 10
-MAX_EMPTY_BATCHES = 3
 
 
 def load_object_types(path: Path) -> dict[str, str]:
@@ -35,6 +35,21 @@ def load_object_types(path: Path) -> dict[str, str]:
     return object_types
 
 
+def validate_object(row: object, object_types: dict[str, str], ids: set[str], location: str) -> None:
+    if not isinstance(row, dict) or any(
+        not isinstance(row.get(key), str) or not row[key].strip()
+        for key in ("object_id", "object_type", "name")
+    ):
+        raise ValueError(f"{location}: ожидаются непустые object_id, object_type и name")
+    if row["object_type"] not in object_types:
+        raise ValueError(f"{location}: неизвестный тип {row['object_type']!r}")
+    if row["object_id"] in ids:
+        raise ValueError(f"{location}: повторяется object_id {row['object_id']!r}")
+    if not isinstance(row.get("attributes", {}), dict) or row["name"].splitlines() != [row["name"]]:
+        raise ValueError(f"{location}: ожидаются однострочное имя и объект attributes")
+    ids.add(row["object_id"])
+
+
 def load_world(path: Path, object_types: dict[str, str]) -> list[dict]:
     objects = []
     ids = set()
@@ -45,18 +60,7 @@ def load_world(path: Path, object_types: dict[str, str]) -> list[dict]:
                 row = json.loads(line)
             except ValueError as exc:
                 raise ValueError(f"{location}: некорректная строка JSON") from exc
-            if not isinstance(row, dict) or any(
-                not isinstance(row.get(key), str) or not row[key].strip()
-                for key in ("object_id", "object_type", "name")
-            ):
-                raise ValueError(f"{location}: ожидаются непустые object_id, object_type и name")
-            if row["object_type"] not in object_types:
-                raise ValueError(f"{location}: неизвестный тип {row['object_type']!r}")
-            if row["object_id"] in ids:
-                raise ValueError(f"{location}: повторяется object_id {row['object_id']!r}")
-            if not isinstance(row.get("attributes", {}), dict) or row["name"].splitlines() != [row["name"]]:
-                raise ValueError(f"{location}: ожидаются однострочное имя и объект attributes")
-            ids.add(row["object_id"])
+            validate_object(row, object_types, ids, location)
             objects.append(row)
     if not objects:
         raise ValueError(f"{path}: мир пуст")
@@ -65,17 +69,20 @@ def load_world(path: Path, object_types: dict[str, str]) -> list[dict]:
 
 def generate_world(
     object_types: dict[str, str], generate, *, n_objects_per_type: int, max_name_length: int,
+    min_completion_ratio=0.8, max_generation_attempts=3,
 ) -> list[dict]:
     objects = []
     for object_type, description in object_types.items():
         names = {}
         empty_batches = 0
         last_problem = ""
-        while len(names) < n_objects_per_type:
+        minimum = ceil(n_objects_per_type * min_completion_ratio)
+        request_budget = ceil(n_objects_per_type / BATCH_SIZE) * max_generation_attempts
+        for _ in range(request_budget):
             count = min(BATCH_SIZE, n_objects_per_type - len(names))
             schema = {
                 "type": "array",
-                "minItems": count,
+                "minItems": 1,
                 "maxItems": count,
                 "items": {"type": "string", "minLength": 1, "maxLength": max_name_length},
             }
@@ -119,11 +126,14 @@ def generate_world(
                 print(f"Мир: {object_type} — {len(names)}/{n_objects_per_type}", flush=True)
             else:
                 empty_batches += 1
-                if empty_batches == MAX_EMPTY_BATCHES:
-                    raise ValueError(
-                        f"Мир: {object_type} — получено {len(names)}/{n_objects_per_type} названий; "
-                        f"{last_problem}"
-                    )
+            if len(names) >= minimum:
+                break
+
+        if len(names) < minimum:
+            print(
+                f"Мир: {object_type} — получено {len(names)}/{n_objects_per_type}, "
+                f"минимум {minimum}; {last_problem}", flush=True,
+            )
 
         objects.extend(
             {"object_id": f"{object_type}_{index:06d}", "object_type": object_type, "name": name}

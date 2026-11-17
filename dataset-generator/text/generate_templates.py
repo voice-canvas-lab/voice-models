@@ -2,6 +2,7 @@
 
 import json
 import re
+from math import ceil
 from string import Formatter
 
 from jsonschema import Draft202012Validator, ValidationError
@@ -9,7 +10,10 @@ from jsonschema import Draft202012Validator, ValidationError
 from command_form import validate_command_form
 
 
-def generate_templates(action: dict, n_formulations: int, generate) -> list[dict]:
+def generate_templates(
+    action: dict, n_formulations: int, generate, *,
+    min_completion_ratio=0.8, max_generation_attempts=3,
+) -> list[dict]:
     parameters = action['parameters']
     required = set(parameters['required'])
     properties = parameters['properties']
@@ -19,25 +23,24 @@ def generate_templates(action: dict, n_formulations: int, generate) -> list[dict
     }
     validator = Draft202012Validator(item_schema)
     prompt = (
-        'Сформулируй разные короткие голосовые команды на русском для одного действия. '
-        'Пиши разговорно, как человек обращается к приложению. Варьируй глаголы и порядок слов. '
-        'Сам шаблон должен уже задавать естественную конструкцию для данного действия. '
-        'Начни с русского глагола в повелительном наклонении. '
-        'Формулируй прямую команду без вопросов, подтверждений и условий. '
-        'Описание действия объясняет смысл, его не нужно копировать или пересказывать в команде. '
-        'Вместо конкретных значений используй метки {имя_параметра}, включая тип объекта. '
-        'Обязательные параметры включай в каждый шаблон; необязательные можешь включать или пропускать. '
-        'Не добавляй другие метки, конкретные значения, действия или пояснения. '
-        'Верни массив объектов с полем text.\n'
-        f"Описание действия: {action['description']}\n"
-        f'Схема параметров: {json.dumps(parameters, ensure_ascii=False)}'
+        'Составь короткие естественные команды на русском для указанного действия. '
+        'Каждую команду начни с глагола в повелительном наклонении. '
+        'Точно передавай смысл действия. Один и тот же подходящий глагол можно повторять. '
+        'Вместо значений используй {имя_параметра} из схемы. '
+        'Включай все обязательные параметры, необязательные — по необходимости. '
+        'Верни до указанного числа корректных шаблонов без пояснений. '
+        'Если естественных вариантов меньше, верни меньше. '
+        'Формат ответа — массив объектов с полем text.\n'
+        f"Действие: {action['description']}\n"
+        f'Параметры: {json.dumps(parameters, ensure_ascii=False)}'
     )
+    minimum = ceil(n_formulations * min_completion_ratio)
     accepted = {}
     error = ''
-    for _ in range(3):
+    for _ in range(max_generation_attempts):
         remaining = n_formulations - len(accepted)
-        schema = {'type': 'array', 'items': item_schema, 'minItems': remaining, 'maxItems': remaining}
-        request = prompt + f'\nНужно шаблонов: {remaining}.'
+        schema = {'type': 'array', 'items': item_schema, 'minItems': 1, 'maxItems': remaining}
+        request = prompt + f'\nВерни до указанного числа шаблонов: {remaining}.'
         if accepted:
             request += '\nНе повторяй: ' + json.dumps(list(accepted), ensure_ascii=False)
         request_prompt = request + error
@@ -66,8 +69,8 @@ def generate_templates(action: dict, n_formulations: int, generate) -> list[dict
                     error = f'\nИсправь: {exc}'
         except (ValueError, ValidationError) as exc:
             error = f'\nИсправь ответ: {exc}'
-        if len(accepted) == n_formulations:
+        if len(accepted) >= minimum:
             break
-    if len(accepted) < n_formulations:
+    if len(accepted) < minimum:
         print(f"{action['action_id']}: получено {len(accepted)}/{n_formulations} шаблонов.", flush=True)
     return list(accepted.values())
