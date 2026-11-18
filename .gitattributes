@@ -1,6 +1,4 @@
-# Audited SHA256 values refer to exact bytes, including existing line endings.
-# Preserve these bytes across Windows/Linux checkouts; do not rewrite old freezes.
-/scripts/** -text
-/configs/** -text
-/examples/** -text
-/docs/reports/** -text
+# Preserve exact dataset and historical artifact bytes across platforms.
+/data/** -text
+/dataset-generator/asr-tts/** text eol=lf
+/configs/asr-tts*.json text eol=lf

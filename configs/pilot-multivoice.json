@@ -1,5 +1,0 @@
-{
-  "VOICES": ["aidar", "baya", "xenia"],
-  "NOISE_SNRS_DB": [20, 10],
-  "SEED": 42
-}

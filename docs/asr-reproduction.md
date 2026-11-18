@@ -1,16 +1,16 @@
 # Воспроизведение ASR-эксперимента ru-text-only-1.0.1
 
-Команды ниже приведены для будущего запуска из корня репозитория после установки двух окружений по README. При подготовке публикации модели не запускались. Параметры моделей и нормализация не меняются. Полный аудиопрогон требует загрузки моделей и времени; для проверки опубликованных метрик достаточно отдельного блока README без моделей.
+Команды ниже приведены для будущего запуска из корня репозитория после установки двух окружений по [README модуля](../dataset-generator/asr-tts/README.md). При подготовке публикации модели не запускались. Параметры моделей и нормализация не меняются. Полный аудиопрогон требует загрузки моделей и времени; для проверки опубликованных метрик достаточно отдельного блока README без моделей.
 
 ## Входы и проверка до моделей
 
-Источник — точный снимок `examples/zhanna-v1/samples.jsonl` из PR №5, commit `a1dff1335109d12e5594391066d6a260ce54601b`. SHA256 и путь источника сохранены в `source.json`. Производные данные и правила лежат в `text-only-v1.0.1`; выбранные 151 sample_id и отдельные 12 вопросов — в `experiment-text-only-v1.0.1`.
+Источник — точный снимок `data/v1/asr-tts/source_samples.jsonl` из PR №5, commit `a1dff1335109d12e5594391066d6a260ce54601b`. SHA256 и путь источника сохранены в `source.json`. Производные данные и правила лежат в `data/v1/asr-tts/`: `tts_ready_samples.jsonl` содержит 151 выбранную команду, `pronunciation_review.jsonl` — 12 вопросов. Это исторический снимок, а не актуальная версия датасета Жанны.
 
 Не запускайте старый `run_experiment.py` из локального плана: он привязан к прежним выходам и пилотным файлам. Не обновляйте старый freeze.json. Для нового запуска копируется конфигурация с новым выходным каталогом, а функция preflight проверяет её без загрузки моделей:
 
 ```powershell
 New-Item -ItemType Directory -Path outputs -Force | Out-Null
-.\.venv\Scripts\python.exe -B -c "import sys,json; from pathlib import Path; sys.path.insert(0,'scripts'); from run_pipeline import preflight; c=json.loads(Path('configs/pipeline-zhanna-text-only-v1.0.1.json').read_text(encoding='utf-8')); c['output']='outputs/reproduce-zhanna-text-only-v1.0.1'; p=Path('outputs/reproduce-zhanna-config.json'); p.open('x',encoding='utf-8').write(json.dumps(c,indent=2)); _,r,s,e=preflight(p); print('samples=',len(s),'expected_wavs=',len(s)*9)"
+.\.venv\Scripts\python.exe -B -c "import sys,json; from pathlib import Path; sys.path.insert(0,'dataset-generator/asr-tts'); from run_pipeline import preflight; c=json.loads(Path('configs/asr-tts.json').read_text(encoding='utf-8')); c['output']='outputs/reproduce-zhanna-text-only-v1.0.1'; p=Path('outputs/reproduce-zhanna-config.json'); p.open('x',encoding='utf-8').write(json.dumps(c,indent=2)); _,r,s,e=preflight(p); print('samples=',len(s),'expected_wavs=',len(s)*9)"
 if ($LASTEXITCODE -ne 0) { throw 'Preflight failed; do not start models' }
 ```
 
@@ -19,7 +19,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Preflight failed; do not start models' }
 Только для проверки воспроизводимости самого преобразования, без TTS/ASR:
 
 ```powershell
-.\.venv\Scripts\python.exe -B scripts/spoken_text_text_only.py --source examples/zhanna-v1/samples.jsonl --output outputs/reproduce-derived-text-only-1.0.1
+.\.venv\Scripts\python.exe -B dataset-generator/asr-tts/spoken_text_text_only.py --source data/v1/asr-tts/source_samples.jsonl --output outputs/reproduce-derived-text-only-1.0.1
 if ($LASTEXITCODE -ne 0) { throw 'Derivation failed' }
 ```
 
@@ -29,16 +29,16 @@ if ($LASTEXITCODE -ne 0) { throw 'Derivation failed' }
 
 ```powershell
 $Run = 'outputs/reproduce-zhanna-text-only-v1.0.1'
-$Samples = 'examples/zhanna-v1/experiment-text-only-v1.0.1/ready_samples.jsonl'
-$Models = 'docs/reports/zhanna-text-only-v1.0.1/artifacts/config.models.json'
+$Samples = 'data/v1/asr-tts/tts_ready_samples.jsonl'
+$Models = 'data/v1/experiments/zhanna-text-only-v1.0.1/config.models.json'
 if (Test-Path -LiteralPath $Run) { throw 'Choose a new run directory' }
 New-Item -ItemType Directory -Path $Run | Out-Null
 Copy-Item -LiteralPath $Samples -Destination "$Run/input_samples.jsonl"
 Copy-Item -LiteralPath $Models -Destination "$Run/config.models.json"
 
-.\.venv\Scripts\python.exe -B scripts/synthesize.py --samples "$Run/input_samples.jsonl" --config "$Run/config.models.json" --output "$Run/dataset"
+.\.venv\Scripts\python.exe -B dataset-generator/asr-tts/synthesize.py --samples "$Run/input_samples.jsonl" --config "$Run/config.models.json" --output "$Run/dataset"
 if ($LASTEXITCODE -ne 0) { throw 'TTS failed; keep partial output' }
-.\.venv\Scripts\python.exe -B scripts/check_dataset.py --dataset "$Run/dataset" --output "$Run/dataset/dataset_checks.json"
+.\.venv\Scripts\python.exe -B dataset-generator/asr-tts/check_dataset.py --dataset "$Run/dataset" --output "$Run/dataset/dataset_checks.json"
 if ($LASTEXITCODE -ne 0) { throw 'Audio audit failed; do not start ASR' }
 
 $Audit = Get-Content -LiteralPath "$Run/dataset/dataset_checks.json" -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -59,18 +59,18 @@ Silero V5: aidar/baya/xenia, seed 42, 48 kHz внутри TTS с полифаз�
 Выполняйте последовательно после успешного шлюза выше; загрузка и прогрев не входят в RTF.
 
 ```powershell
-.\.venv\Scripts\python.exe -B scripts/transcribe.py --dataset "$Run/dataset" --config "$Run/config.models.json" --output "$Run/whisper"
+.\.venv\Scripts\python.exe -B dataset-generator/asr-tts/transcribe.py --dataset "$Run/dataset" --config "$Run/config.models.json" --output "$Run/whisper"
 if ($LASTEXITCODE -ne 0) { throw 'Whisper failed; preserve partial output and logs' }
-.\.venv-gigaam\Scripts\python.exe -B scripts/transcribe_gigaam.py --dataset "$Run/dataset" --config "$Run/config.models.json" --output "$Run/gigaam"
+.\.venv-gigaam\Scripts\python.exe -B dataset-generator/asr-tts/transcribe_gigaam.py --dataset "$Run/dataset" --config "$Run/config.models.json" --output "$Run/gigaam"
 if ($LASTEXITCODE -ne 0) { throw 'GigaAM failed; preserve partial output and logs' }
 
 foreach ($Model in @('whisper', 'gigaam')) {
-    .\.venv\Scripts\python.exe -B scripts/evaluate.py --dataset "$Run/dataset" --results "$Run/$Model" --output "$Run/evaluation-$Model"
+    .\.venv\Scripts\python.exe -B dataset-generator/asr-tts/evaluate.py --dataset "$Run/dataset" --results "$Run/$Model" --output "$Run/evaluation-$Model"
     if ($LASTEXITCODE -ne 0) { throw 'Evaluation failed' }
-    .\.venv\Scripts\python.exe -B scripts/evaluate_numeric.py --dataset "$Run/dataset" --results "$Run/$Model" --baseline "$Run/evaluation-$Model" --output "$Run/numeric-$Model"
+    .\.venv\Scripts\python.exe -B dataset-generator/asr-tts/evaluate_numeric.py --dataset "$Run/dataset" --results "$Run/$Model" --baseline "$Run/evaluation-$Model" --output "$Run/numeric-$Model"
     if ($LASTEXITCODE -ne 0) { throw 'Numerical evaluation failed' }
 }
-.\.venv\Scripts\python.exe -B scripts/compare_conditions.py --dataset "$Run/dataset" --whisper "$Run/evaluation-whisper" --gigaam "$Run/evaluation-gigaam" --output "$Run/comparison"
+.\.venv\Scripts\python.exe -B dataset-generator/asr-tts/compare_conditions.py --dataset "$Run/dataset" --whisper "$Run/evaluation-whisper" --gigaam "$Run/evaluation-gigaam" --output "$Run/comparison"
 if ($LASTEXITCODE -ne 0) { throw 'Comparison failed' }
 ```
 
@@ -88,6 +88,6 @@ foreach ($a in $Audio) {
 }
 ```
 
-Все гипотезы, времена, настройки и метрики остаются в новом `$Run`. Сводные обычные срезы — `comparison/`; отдельные числовые записи и тексты до/после преобразования — `numeric-*/`. Срезы числовой оценки завершённого эксперимента опубликованы в `docs/reports/zhanna-text-only-v1.0.1/artifacts/slices.csv`.
+Все гипотезы, времена, настройки и метрики остаются в новом `$Run`. Сводные обычные срезы — `comparison/`; отдельные числовые записи и тексты до/после преобразования — `numeric-*/`. Срезы числовой оценки завершённого эксперимента опубликованы в `data/v1/experiments/zhanna-text-only-v1.0.1/slices.csv`.
 
 При HTTP 429 остановитесь и сохраните частичный результат; не меняйте ревизию на main. В опубликованном запуске GigaAM продолжили из локального snapshot с проверкой LFS SHA256 и Git blob ID, без повторения Whisper. Исторический локальный cache-only helper не является универсальным публичным загрузчиком; его доказательства сохранены в provenance.json. Повторный запуск после внешнего сбоя должен использовать новый каталог; не удаляйте предыдущие файлы.
