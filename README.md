@@ -1,19 +1,26 @@
 # Voice Models
 
-Models for converting Russian voice commands into structured actions for a notes and drawing application.
-
-The planned pipeline is: **speech → text → actions**.
-
-## Components
-
-- **ASR:** adaptation of a pretrained speech recognition model to Russian voice commands.
-- **Text to actions:** a BERT-based model for intent classification and parameter extraction, using application context when needed.
-
-## Scope
-
-This repository will contain model training, inference, data preparation, and evaluation code.
+Research project for converting Russian voice commands into structured actions
+using descriptions of available actions and application context. The planned
+pipeline uses ASR for transcription and a BERT-based model for action selection
+and argument extraction.
 
 ## Status
 
-Early research and development. Model selection, datasets, and the action schema are being defined.
+Use of the synthetic text generator is temporarily frozen because generated
+commands have insufficient linguistic quality and can disagree with their
+action and argument labels. The code and experimental dataset in `data/v1/`
+are retained for reproducibility and error analysis.
 
+Dataset version `data/v1.1/` uses Russian examples from MASSIVE and an action
+catalog from MASSIVE-Agents.
+
+## Text dataset adapter
+
+Imports Russian examples from MASSIVE and action definitions from MASSIVE-Agents.
+[Adapter README](dataset-generator/massive/README.md)
+
+## Synthetic text generator
+
+Generates synthetic Russian voice commands with action labels and arguments.
+[Generator README](dataset-generator/text/README.md)
