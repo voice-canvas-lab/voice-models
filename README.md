@@ -1,19 +1,12 @@
 # Voice Models
 
-Models for converting Russian voice commands into structured actions for a notes and drawing application.
+Преобразование русских голосовых команд в структурированные действия по описанию доступных операций. Планируемый путь: **речь → текст → действие и аргументы**.
 
-The planned pipeline is: **speech → text → actions**.
+- Текстовый генератор: `dataset-generator/text/` (отдельный PR).
+- [TTS, аудиоаудит, шум, ASR и оценка](dataset-generator/asr-tts/README.md).
+- [Контракты данных](docs/contracts.md).
+- [Отчёт завершённого ASR-эксперимента](docs/reports/zhanna-text-only-v1.0.1.md).
 
-## Components
+В ASR-эксперименте обработаны 151 команда / 1359 синтетических WAV двумя моделями. WER: Whisper-small — 44,09%, GigaAM-v3 — 35,90%. Это предварительная оценка синтетического тракта, не точности выполнения действий. TTS иногда отличается от эталона; числа и технические имена остаются сложными случаями. Ручная проверка нескольких записей не подтверждает весь набор.
 
-- **ASR:** adaptation of a pretrained speech recognition model to Russian voice commands.
-- **Text to actions:** a BERT-based model for intent classification and parameter extraction, using application context when needed.
-
-## Scope
-
-This repository will contain model training, inference, data preparation, and evaluation code.
-
-## Status
-
-Early research and development. Model selection, datasets, and the action schema are being defined.
-
+Код и тесты ASR/TTS находятся в `dataset-generator/asr-tts/`, настройки — в `configs/`, данные — в `data/v1/`. Веса, аудио, окружения и runtime-кеш в Git не включаются.

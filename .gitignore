@@ -1,0 +1,6 @@
+.venv/
+.venv-gigaam/
+__pycache__/
+*.pyc
+/outputs/
+/.cache/

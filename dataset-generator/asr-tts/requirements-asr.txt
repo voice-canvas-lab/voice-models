@@ -1,0 +1,5 @@
+faster-whisper==1.2.1
+av==16.0.1
+huggingface-hub==2.4.0
+soundfile==0.13.1
+jiwer==4.0.0

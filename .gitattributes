@@ -1,0 +1,4 @@
+# Preserve exact dataset and historical artifact bytes across platforms.
+/data/** -text
+/dataset-generator/asr-tts/** text eol=lf
+/configs/asr-tts*.json text eol=lf

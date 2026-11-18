@@ -1,0 +1,47 @@
+{
+  "source": "User confirmation in this conversation after listening to all five pilot WAV",
+  "scope": "Only these five exact xenia clean recordings; not the future full experiment",
+  "status": "correct_pronunciation_confirmed",
+  "records": [
+    {
+      "audio_id": "audio_0001_xenia_clean",
+      "sample_id": "sample_000027",
+      "wav": "outputs/tts-zhanna-text-only-v1.0.1-pilot/audio/audio_0001_xenia_clean.wav",
+      "sha256": "bee75484339669dc07d9e526a878e903d6cfa635e54554dabc59f0a7f345ee38",
+      "spoken_reference": "Открой документ Инструкция по ремонту",
+      "correct_pronunciation_confirmed": true
+    },
+    {
+      "audio_id": "audio_0002_xenia_clean",
+      "sample_id": "sample_000039",
+      "wav": "outputs/tts-zhanna-text-only-v1.0.1-pilot/audio/audio_0002_xenia_clean.wav",
+      "sha256": "b7b7a7725ef6cdc1b441383d685b9b70b80d7b103e8049b16437a7798335c0c0",
+      "spoken_reference": "Открой Список две тысячи двадцать три десять ноль шесть семнадцать. сорок. двадцать девять",
+      "correct_pronunciation_confirmed": true
+    },
+    {
+      "audio_id": "audio_0003_xenia_clean",
+      "sample_id": "sample_000157",
+      "wav": "outputs/tts-zhanna-text-only-v1.0.1-pilot/audio/audio_0003_xenia_clean.wav",
+      "sha256": "8a54b0e77b6032ecbe9ec2b16ec0461edb00cf491e8630656c8805d07f2bb187",
+      "spoken_reference": "Сохранить изменения открытого документа Документация версия два точка ноль",
+      "correct_pronunciation_confirmed": true
+    },
+    {
+      "audio_id": "audio_0004_xenia_clean",
+      "sample_id": "sample_000124",
+      "wav": "outputs/tts-zhanna-text-only-v1.0.1-pilot/audio/audio_0004_xenia_clean.wav",
+      "sha256": "e5eed63b41aa23fffaf5acde5ef677076d13a74c91f3ca11bc7b4da7e6658e39",
+      "spoken_reference": "Показать Фото для отчета две тысячи двадцать три ноль семь ноль два ноль девять ноль два семнадцать",
+      "correct_pronunciation_confirmed": true
+    },
+    {
+      "audio_id": "audio_0005_xenia_clean",
+      "sample_id": "sample_000163",
+      "wav": "outputs/tts-zhanna-text-only-v1.0.1-pilot/audio/audio_0005_xenia_clean.wav",
+      "sha256": "ff2ffdcf11f8f77aa14f3548f53b741517f65fc81becda90de9c658af33d5973",
+      "spoken_reference": "Сохранить изменения файла документ ноль ноль ноль ноль один пять",
+      "correct_pronunciation_confirmed": true
+    }
+  ]
+}

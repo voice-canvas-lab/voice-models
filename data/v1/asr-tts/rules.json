@@ -1,0 +1,30 @@
+{
+  "rules_version": "ru-text-only-1.0.1",
+  "source_sha256": "48300af1561a011f48adaa135028c80bbd847d534756790a00fed12f1baac535",
+  "code_sha256": "d34c7873c26ec68c0b5d965449f057725077dede5daeaa9c6fc1733edadc43b7",
+  "number_helper_sha256": "5819f07c68de1357c4bc9a86e2f91d2299e263427678767b5effc6a198d58634",
+  "samples": 163,
+  "changed_texts": 118,
+  "tts_ready": 151,
+  "pronunciation_review": 12,
+  "previous_63_released": 52,
+  "previous_63_still_pronunciation_review": 11,
+  "reason_counts": {
+    "number_as_written": 207,
+    "underscore_as_word_boundary": 134,
+    "leading_zero_digits": 54,
+    "hyphen_as_word_boundary": 103,
+    "numeric_components_punctuation_preserved": 37,
+    "explicit_version": 2,
+    "technical_digit_sequence": 8
+  },
+  "pronunciation_issue_counts": {
+    "mixed_alphanumeric_pronunciation_unresolved": 5,
+    "latin_word_or_id_prefix_pronunciation_unresolved": 6,
+    "mixed_alphabet_word_pronunciation_unresolved": 1
+  },
+  "reads_args_context_action_id": false,
+  "label_issues_block_audio": false,
+  "character_reversible": false,
+  "candidate_text_is_tts_input_and_asr_reference": true
+}

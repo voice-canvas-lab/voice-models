@@ -1,0 +1,43 @@
+{
+  "review_date": "2026-11-12",
+  "source": "Наблюдения пользователя после прослушивания записей №3 и №4 из review-six; записано со слов пользователя, без нового запуска моделей.",
+  "scope": "Только указанные audio_id и SHA256. Наблюдения о повторах не подтверждают точное соответствие всего аудио эталону.",
+  "observations": [
+    {
+      "review_six_number": 3,
+      "audio_id": "audio_0097_xenia_snr10",
+      "sample_id": "sample_000102",
+      "voice": "xenia",
+      "condition": "snr10",
+      "wav": "outputs/pipeline-zhanna-text-only-v1.0.1/dataset/audio/audio_0097_xenia_snr10.wav",
+      "sha256": "f1047a27a10ff85d2210a07a7e4421aa6ae805fc1a05ef4cf2fc1c60aaa85c11",
+      "observation": "Пользователь слышит повторы цифр в аудио. Их точное количество и соответствие эталону не установлены.",
+      "digit_repetitions_heard_by_user": true,
+      "exact_repetition_count": null,
+      "reference_correspondence_established": false,
+      "correct_pronunciation_confirmed": false,
+      "attribution": "Нельзя приписывать все повторы только Whisper; вклад синтетического аудио и ASR не разделён."
+    },
+    {
+      "review_six_number": 4,
+      "audio_id": "audio_0112_baya_snr20",
+      "sample_id": "sample_000119",
+      "voice": "baya",
+      "condition": "snr20",
+      "wav": "outputs/pipeline-zhanna-text-only-v1.0.1/dataset/audio/audio_0112_baya_snr20.wav",
+      "sha256": "5d4c52fb42a28064c56f73e81a571d9b141dc8a7ea9dd0c1a586aaa186548e1d",
+      "observation": "Пользователь не слышит повторов цифр в аудио, хотя в гипотезе Whisper есть длинный повторяющийся хвост.",
+      "digit_repetitions_heard_by_user": false,
+      "reference_correspondence_established": false,
+      "correct_pronunciation_confirmed": false,
+      "attribution": "По наблюдению пользователя повторяющийся хвост добавлен Whisper, а не услышан в этой записи. Вывод не распространяется на другие WAV."
+    }
+  ],
+  "other_review_six_records_not_marked_reviewed": [
+    "audio_0027_xenia_clean",
+    "audio_0035_xenia_clean",
+    "audio_0027_xenia_snr20",
+    "audio_0035_xenia_snr10"
+  ],
+  "references_hypotheses_freezes_and_metrics_unchanged": true
+}

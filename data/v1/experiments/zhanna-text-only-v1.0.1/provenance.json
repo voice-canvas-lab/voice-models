@@ -1,0 +1,288 @@
+{
+  "source": {
+    "repository": "https://github.com/voice-canvas-lab/voice-models",
+    "pull_request": "https://github.com/voice-canvas-lab/voice-models/pull/5",
+    "source_path": "data/v1/dataset/samples.jsonl",
+    "commit": "a1dff1335109d12e5594391066d6a260ce54601b",
+    "sha256": "48300af1561a011f48adaa135028c80bbd847d534756790a00fed12f1baac535",
+    "bytes": 86175,
+    "samples": 163,
+    "preservation": "Exact git blob bytes; no text, context, labels, groups or split changes."
+  },
+  "rules": {
+    "rules_version": "ru-text-only-1.0.1",
+    "source_sha256": "48300af1561a011f48adaa135028c80bbd847d534756790a00fed12f1baac535",
+    "code_sha256": "d34c7873c26ec68c0b5d965449f057725077dede5daeaa9c6fc1733edadc43b7",
+    "number_helper_sha256": "5819f07c68de1357c4bc9a86e2f91d2299e263427678767b5effc6a198d58634",
+    "samples": 163,
+    "changed_texts": 118,
+    "tts_ready": 151,
+    "pronunciation_review": 12,
+    "previous_63_released": 52,
+    "previous_63_still_pronunciation_review": 11,
+    "reason_counts": {
+      "number_as_written": 207,
+      "underscore_as_word_boundary": 134,
+      "leading_zero_digits": 54,
+      "hyphen_as_word_boundary": 103,
+      "numeric_components_punctuation_preserved": 37,
+      "explicit_version": 2,
+      "technical_digit_sequence": 8
+    },
+    "pronunciation_issue_counts": {
+      "mixed_alphanumeric_pronunciation_unresolved": 5,
+      "latin_word_or_id_prefix_pronunciation_unresolved": 6,
+      "mixed_alphabet_word_pronunciation_unresolved": 1
+    },
+    "reads_args_context_action_id": false,
+    "label_issues_block_audio": false,
+    "character_reversible": false,
+    "candidate_text_is_tts_input_and_asr_reference": true
+  },
+  "models_config": {
+    "VOICES": [
+      "aidar",
+      "baya",
+      "xenia"
+    ],
+    "NOISE_SNRS_DB": [
+      20,
+      10
+    ],
+    "SEED": 42,
+    "TTS": {
+      "model": "v5_ru",
+      "model_sha256": "7ba04d42340fe0398042eed2e0d12d62e23096d626b1b9feff4dcb1309197ab4",
+      "cpu_threads": 4,
+      "put_accent": true,
+      "put_yo": true
+    },
+    "ASR": {
+      "whisper": {
+        "model": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120",
+        "device": "cpu",
+        "compute_type": "int8",
+        "cpu_threads": 4,
+        "decoding": {
+          "language": "ru",
+          "task": "transcribe",
+          "beam_size": 5,
+          "temperature": 0.0,
+          "condition_on_previous_text": false,
+          "vad_filter": false,
+          "word_timestamps": false
+        }
+      },
+      "gigaam": {
+        "model": "ai-sage/GigaAM-v3",
+        "revision": "cec030b4c4f35d928e4a9044a3bdb29ebd499fac",
+        "device": "cpu",
+        "compute_type": "float32",
+        "cpu_threads": 4,
+        "decoding": {
+          "method": "greedy_ctc"
+        }
+      }
+    }
+  },
+  "hardware": {
+    "whisper": {
+      "cpu": "13th Gen Intel(R) Core(TM) i7-13700H",
+      "logical_cpus": 20,
+      "os": "Windows-10-10.0.26200-SP0",
+      "machine": "AMD64"
+    },
+    "gigaam": {
+      "cpu": "13th Gen Intel(R) Core(TM) i7-13700H",
+      "logical_cpus": 20,
+      "os": "Windows-10-10.0.26200-SP0",
+      "machine": "AMD64"
+    }
+  },
+  "python": {
+    "whisper": "3.11.5",
+    "gigaam": "3.11.5"
+  },
+  "tts_settings": {
+    "created_at": "2026-11-11T17:54:44.860627+00:00",
+    "model": "Silero TTS V5",
+    "model_id": "v5_ru",
+    "model_url": "https://models.silero.ai/models/tts/ru/v5_ru.pt",
+    "model_sha256": "7ba04d42340fe0398042eed2e0d12d62e23096d626b1b9feff4dcb1309197ab4",
+    "device": "cpu",
+    "seed": 42,
+    "config": {
+      "VOICES": [
+        "aidar",
+        "baya",
+        "xenia"
+      ],
+      "NOISE_SNRS_DB": [
+        20,
+        10
+      ],
+      "SEED": 42,
+      "TTS": {
+        "model": "v5_ru",
+        "model_sha256": "7ba04d42340fe0398042eed2e0d12d62e23096d626b1b9feff4dcb1309197ab4",
+        "cpu_threads": 4,
+        "put_accent": true,
+        "put_yo": true
+      },
+      "ASR": {
+        "whisper": {
+          "model": "Systran/faster-whisper-small",
+          "revision": "536b0662742c02347bc0e980a01041f333bce120",
+          "device": "cpu",
+          "compute_type": "int8",
+          "cpu_threads": 4,
+          "decoding": {
+            "language": "ru",
+            "task": "transcribe",
+            "beam_size": 5,
+            "temperature": 0.0,
+            "condition_on_previous_text": false,
+            "vad_filter": false,
+            "word_timestamps": false
+          }
+        },
+        "gigaam": {
+          "model": "ai-sage/GigaAM-v3",
+          "revision": "cec030b4c4f35d928e4a9044a3bdb29ebd499fac",
+          "device": "cpu",
+          "compute_type": "float32",
+          "cpu_threads": 4,
+          "decoding": {
+            "method": "greedy_ctc"
+          }
+        }
+      }
+    },
+    "config_sha256": "9e3fcc08ff9151841622ba8947fbe41c7558c4b7f8b45d370d1e36be60b94505",
+    "noise": {
+      "type": "artificial_white_gaussian",
+      "power_rule": "mean(x**2) over ALL decoded mono PCM_16 samples, including silence; no VAD, centering or DC removal",
+      "snr_measurement_rule": "10*log10(mean((gain*clean_pcm)**2)/mean((noisy_pcm-gain*clean_pcm)**2)); residual includes PCM_16 quantization",
+      "snr_tolerance_db": 0.05,
+      "source": "Synthetic RNG; not a recording of a real acoustic environment"
+    },
+    "threads": 4,
+    "synthesis": {
+      "sample_rate": 48000,
+      "put_accent": true,
+      "put_yo": true
+    },
+    "output_sample_rate": 16000,
+    "resampling": "scipy.signal.resample_poly(up=1, down=3)",
+    "peak_protection": "If peak >= 0.999, scale to 0.98; gain recorded per file in audio_checks.json",
+    "output_format": "WAV mono PCM_16",
+    "samples_sha256": "bf43aa7cc42c102388977b77a85cf3cc80cc7895139c159d6b982907af927ba4",
+    "script_sha256": "b8c1ddf435af09faac64a143751b59596560e621caf9d2a6a561047620d9b4c9",
+    "versions": {
+      "python": "3.11.5",
+      "torch": "2.5.1+cpu",
+      "numpy": "1.26.4",
+      "scipy": "1.14.1",
+      "soundfile": "0.13.1"
+    },
+    "qc_thresholds": {
+      "min_duration_sec": 0.2,
+      "max_duration_sec": 30,
+      "min_rms": 1e-05,
+      "max_clipped_fraction": 0.001,
+      "clipping_amplitude": 0.999
+    }
+  },
+  "audio_audit": {
+    "passed": true,
+    "files": 1359,
+    "clean": 453,
+    "noisy": 906,
+    "conditions": {
+      "clean": 453,
+      "snr20": 453,
+      "snr10": 453
+    },
+    "max_peak": 0.99871826171875,
+    "clipped_files": 0,
+    "max_snr_error_db": 0.00016206981529620634,
+    "snr_tolerance_db": 0.05,
+    "noise_source": "Artificial white Gaussian RNG noise, NOT a real acoustic environment recording",
+    "noise_pcm_reconstruction": "bit-exact for every noisy file"
+  },
+  "length_gate": {
+    "passed": true,
+    "checked": 1359,
+    "limit_sec": 25,
+    "over_limit_count": 0,
+    "max_duration_sec": 18.425,
+    "over_limit": [],
+    "audio_trimmed": false,
+    "audio_excluded": false,
+    "full_asr_started_at_check": false
+  },
+  "normalization": "Unicode NFC → lowercase → ё to е → Unicode punctuation (category P*) replaced by spaces → whitespace collapsed. Words, numbers, negations and self-corrections are retained. CER includes spaces in normalized strings. Empty normalized references are kept: hypothesis tokens count as insertions; a rate with zero reference denominator is null (undefined), even for two empty strings. Their errors still contribute to corpus totals. Corpus rates are summed errors / summed reference units, never mean per-record rates.",
+  "numeric_policy": {
+    "independence": "canonicalize(text) is applied separately to reference and hypothesis; it has no other input and does not repair predictions.",
+    "supported": "Russian month-name calendar dates; versions after explicit версия; clock units hour/minute[/second] or valid compact clocks in explicit время context; known opaque ID prefixes.",
+    "zero_policy": "Every explicit zero and component width is retained. No inferred zero padding. Thus 06 differs from 6, 09 differs from 9, ID 000001 differs from 1; explicit ноль один equals 01.",
+    "boundaries": "Typed tokens numdate/numtime/numversion/numid with ordered named components and end markers. No reordering, merging or filling missing components.",
+    "unknowns": "Unsupported/ambiguous numeric expressions remain literal and receive flags. No ISO/slash date inference, bare numbers, naked compact time inference or guessed splitting of 17:4029.",
+    "metric_units": "Additional WER/CER include typed canonical tokens and therefore have different denominators from baseline. They are a supplemental encoding-sensitive diagnostic, not a replacement for baseline ASR quality metrics.",
+    "base_normalization": "Existing evaluate.score/normalize is applied after this separate stage, unchanged. Unknown spans are preserved before that existing punctuation normalization."
+  },
+  "numeric_version": "ru-numeric-eval-1.0.0",
+  "numeric_rules_sha256": "62242a53de5f74c4419b1c2e5796e20705d6b054582280cb14eb71faf85c7f6d",
+  "baseline_script_sha256": "19b6e3104ecebd235c8fb1c31206e52bb9ec4b4466fb43554e6aad0d1391d37e",
+  "successful_records_per_model": 1359,
+  "missing_or_empty_per_model": 0,
+  "same_wav_hashes_both_models": true,
+  "recovery": {
+    "failed_metadata_attempts": 2,
+    "http_status": 429,
+    "whisper_rerun": false,
+    "tts_rerun": false,
+    "cache_verification": {
+      "model": "ai-sage/GigaAM-v3",
+      "revision": "cec030b4c4f35d928e4a9044a3bdb29ebd499fac",
+      "snapshot": "C:\\02_Projects\\Programming\\voice-models\\.cache\\gigaam\\hub\\models--ai-sage--GigaAM-v3\\snapshots\\cec030b4c4f35d928e4a9044a3bdb29ebd499fac",
+      "files": {
+        "config.json": {
+          "sha256": "3dbcd2ebe1a572cb9a9945eeb3faf8b59180d408e61a61ecda44db30421e7251",
+          "size": 1623,
+          "verified_against_cached_tree": true
+        },
+        "modeling_gigaam.py": {
+          "sha256": "269be43b635b1e510115baa2a843c5cbaa052e8adf0be30dc133a2ba5b5f2d86",
+          "size": 49135,
+          "verified_against_cached_tree": true
+        },
+        "pytorch_model.bin": {
+          "sha256": "9801f83ef3979779982c4f83ec1c234d7571e8c1a5aa2bfc0b09ceb97a16cd75",
+          "size": 442405251,
+          "verified_against_cached_tree": true
+        },
+        "tokenizer.model": {
+          "sha256": "0b9a1960898fbfdf5424ab852ea17445eb3da960fba23e977ff100eb0054fbc8",
+          "size": 240941,
+          "verified_against_cached_tree": true
+        }
+      },
+      "tree_sha256": "9807ade44cd7a2200d94c6386f4bcd43ec6553991131c18e83f00399cd1e6fef",
+      "wrapper_sha256": "4133beae4ccc0238ac3496411bb6df672acf648aec071de42137595c1354204d",
+      "adapter_sha256": "f43b7710381ad50315035d0a5f304c634a7e779dcb7b7d7a5afb2e3ca69a1d15",
+      "reason": "Two HTTP 429 failures before inference; no model/decoding/reference changes",
+      "network_disabled": true,
+      "config_matches_successful_pilot": true
+    }
+  },
+  "manual_confirmation_scope": "Only the five exact WAV in manual-review-five.json; not all 1359 WAV",
+  "speed_preliminary": true,
+  "original_outputs": {
+    "tts": "outputs/pipeline-zhanna-text-only-v1.0.1/dataset",
+    "asr": "outputs/asr-zhanna-text-only-v1.0.1-full-cached"
+  },
+  "suspicious_listening_candidates": 310,
+  "all_suspicious_records_retained": true
+}
